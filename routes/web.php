@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookBorrowController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\HomeController;
@@ -16,6 +17,9 @@ Route::get('book/{id}', [BookController::class, 'show'])->name('book.show');
 Route::get('/search', [SearchController::class, 'searchBooks'])->name('search');
 
 Route::get('/home', [HomeController::class, 'index'])
+    ->middleware('auth');
+
+Route::post('/borrow/{book_id}', [BookBorrowController::class, 'store'])->name('borrow')
     ->middleware('auth');
 
 Route::middleware('librarian')->prefix('librarian')->group(function () {

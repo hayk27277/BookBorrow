@@ -36,7 +36,7 @@
                                         @foreach($book->genres as $genre)
                                             {{$genre->name}}
                                             @if(!$loop->last)
-                                               ,
+                                                ,
                                             @endif
                                         @endforeach
                                     </span>
@@ -104,10 +104,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" name="add-to-cart" value="7145"
-                                    class="btn btn-dark border-0 rounded-0 p-3 min-width-250 ml-md-4 single_add_to_cart_button button alt">
-                                Borrow a book
-                            </button>
+                            @if(!auth()->user()->hasBookInRentals($book->id))
+                                <form action="{{route('borrow',$book->id)}}" method="post">
+                                    @csrf
+                                    <button type="submit" name="add-to-cart" value="7145"
+                                            class="btn btn-dark border-0 rounded-0 p-3 min-width-250 ml-md-4 single_add_to_cart_button button alt">
+                                        Borrow a book
+                                    </button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>

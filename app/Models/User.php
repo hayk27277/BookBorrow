@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     public function rentals(): HasMany
     {
-        return $this->hasMany(Borrow::class);
+        return $this->hasMany(Borrow::class,'reader_id');
     }
 
     public function readerBorrows(): HasMany
@@ -67,5 +67,13 @@ class User extends Authenticatable
     public function managedReturns(): HasMany
     {
         return $this->hasMany(Borrow::class, 'return_managed_by');
+    }
+
+    public function hasBookInRentals($bookId): bool
+    {
+        $book = $this->rentals()
+            ->where(['book_id'=> $bookId])->first();
+
+        return (bool)$book;
     }
 }
