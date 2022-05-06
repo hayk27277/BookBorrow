@@ -54,11 +54,6 @@ class User extends Authenticatable
         return $this->hasMany(Borrow::class,'reader_id');
     }
 
-    public function readerBorrows(): HasMany
-    {
-        return $this->hasMany(Borrow::class, 'reader_id');
-    }
-
     public function managedRequests(): HasMany
     {
         return $this->hasMany(Borrow::class, 'request_managed_by');
