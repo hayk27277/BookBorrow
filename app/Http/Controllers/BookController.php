@@ -70,36 +70,39 @@ class BookController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return Response
+     * @param Book $book
+     * @return Application|Factory|View
      */
-    public function edit($id)
+    public function edit(Book $book)
     {
-        //
+        return view('pages.librarian.books.edit', compact('book'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
      * @param Request $request
-     * @param int $id
-     * @return Response
+     * @param Book $book
+     * @return void
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Book $book)
     {
         //
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return Response
+     * @param Book $book
+     * @return RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Book $book): RedirectResponse
     {
-        //
+        $bookDeleted = $book
+            ->delete();
+
+        if (!$bookDeleted) {
+            return redirect()->back()
+                ->with('error', 'Something went wrong please try again!');
+        }
+
+        return redirect()->back()
+            ->with('success', 'Book deleted successfully!');
     }
 }

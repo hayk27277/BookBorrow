@@ -52,6 +52,7 @@
                                             </label>
                                         </div>
                                     </div>
+
                                     <div class="col-6 col-md-3 mb-3 mb-md-0">
                                         <div class="">
                                             <label class="border-bottom d-block checkbox-outline__label py-3 px-1 mb-0"
@@ -111,8 +112,6 @@
                     </div>
                 </div>
             </div>
-
-
         </main>
     </div>
 @endsection
