@@ -2,7 +2,7 @@
     <div class="product__inner overflow-hidden p-3 p-md-4d875">
         <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
             <div class="woocommerce-loop-product__thumbnail">
-                <a href="{{route('books.show',$book->id)}}" class="d-block">
+                <a href="{{route('book.show',$book->id)}}" class="d-block">
                     <img src="{{$book->cover_image}}"
                          class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
                          alt="image-description">
