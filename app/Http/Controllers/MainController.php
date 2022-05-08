@@ -9,7 +9,7 @@ use Illuminate\Contracts\View\View;
 class MainController extends Controller
 {
     /**
-     * @param string|null $genreName
+     * @param WidgetService $widgetService
      * @return View
      */
     public function index(WidgetService $widgetService): view

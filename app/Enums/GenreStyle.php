@@ -18,8 +18,8 @@ enum GenreStyle: string
         $allCases = self::cases();
         $allValues = [];
 
-        foreach ($allCases as $case){
-            $allValues[] =$case->value;
+        foreach ($allCases as $case) {
+            $allValues[] = $case->value;
         }
 
         return $allValues;

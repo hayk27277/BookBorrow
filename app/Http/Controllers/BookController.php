@@ -9,20 +9,16 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 
 class BookController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
+     * @return Application|Factory|View
      */
     public function index()
     {
-        //
+        return view('librarian.books.index');
     }
 
     /**
@@ -46,8 +42,8 @@ class BookController extends Controller
 
         $book->genres()->attach($request->genres);
 
-        return redirect('home')
-            ->with('success', 'Book created successfully');
+        return redirect()->route('books.index')
+            ->with('success', 'Book N' . $book->isbn . 'updated successfully!');
     }
 
     /**
@@ -79,13 +75,20 @@ class BookController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param BookStoreRequest $request
      * @param Book $book
-     * @return void
+     * @return mixed
      */
-    public function update(Request $request, Book $book)
+    public function update(BookStoreRequest $request, Book $book): mixed
     {
-        //
+        $book->update(
+            $request->validated()
+        );
+
+        $book->genres()->sync($request->genres);
+
+        return redirect()->route('books.index')
+            ->with('success', 'Book N' . $book->isbn . 'updated successfully!');
     }
 
     /**

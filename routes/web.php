@@ -17,6 +17,7 @@ Route::get('book/{id}', [BookController::class, 'show'])->name('book.show');
 Route::get('/search', [SearchController::class, 'searchBooks'])->name('search');
 
 Route::get('/home', [HomeController::class, 'index'])
+    ->name('home')
     ->middleware('auth');
 
 Route::post('/borrow/{book_id}', [BookBorrowController::class, 'store'])->name('borrow')

@@ -10,8 +10,10 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
-        $view = 'pages.' . ($user->is_librarian ? 'librarian' : 'reader') . '.home';
+        if ($user->is_librarian) {
+            return view('pages.librarian.books.index');
+        }
 
-        return view($view);
+        return view('pages.reader.home');
     }
 }

@@ -1,8 +1,5 @@
 <?php
 
-// Statement checker and project zipper for Laravel home projects
-// Created by Tóta Dávid
-// https://github.com/totadavid95
 
 namespace App\Console\Commands;
 
@@ -147,11 +144,13 @@ class zip extends Command
     private $io;
     private $content;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    private function scanProject() {
+    private function scanProject()
+    {
         // Collect project files, omitting items marked by .gitignore files.
         $this->content = $this->scan('.', [
             Gitignore::loadFromStrings([
@@ -164,7 +163,8 @@ class zip extends Command
     }
 
     // Console ask with built-in validation.
-    private function validatedAsk($question, $rules, $messages = []) {
+    private function validatedAsk($question, $rules, $messages = [])
+    {
         $value = $this->ask($question);
         $validator = Validator::make(
             ['field' => $value], // array of values
@@ -181,7 +181,8 @@ class zip extends Command
         return $value;
     }
 
-    private function statement() {
+    private function statement()
+    {
         // First, it is necessary to check if the statement has been filled in before.
         if (file_exists(base_path('STATEMENT.txt')) && Cache::has('statement_checksum') && Cache::has('statement_name') && Cache::has('statement_neptun_code')) {
             $checksum = Cache::get('statement_checksum');
@@ -255,7 +256,7 @@ class zip extends Command
         Cache::set('statement_neptun_code', $neptun);
 
         // Final notes.
-        $this->io->success("The statement was successfully filled in with the name " . $name ." and Neptun code " . $neptun . ".");
+        $this->io->success("The statement was successfully filled in with the name " . $name . " and Neptun code " . $neptun . ".");
         $this->io->note("If the above information is incorrect, delete the STATEMENT.txt file and call the zip command again, and the statement filler will reappear.");
         $this->newLine();
 
@@ -263,7 +264,8 @@ class zip extends Command
         return true;
     }
 
-    private function ignored($path, $gitignores) {
+    private function ignored($path, $gitignores)
+    {
         foreach ($gitignores as $gitignore) {
             if ($gitignore->match($path) || $gitignore->match(basename($path))) {
                 return true;
@@ -272,7 +274,8 @@ class zip extends Command
         return false;
     }
 
-    private function scan($current_directory, $gitignores = []) {
+    private function scan($current_directory, $gitignores = [])
+    {
         $result = [
             'files' => [],
             'dirs' => [],
@@ -296,8 +299,7 @@ class zip extends Command
             if (is_file($current_item)) {
                 if ($this->ignored($current_item, $gitignores)) continue;
                 $result['files'][] = $current_item;
-            }
-            // Collect folders within the current folder.
+            } // Collect folders within the current folder.
             else if (is_dir($current_item)) {
                 if ($this->ignored($current_item, $gitignores)) continue;
                 $result['dirs'][] = $current_item;
@@ -313,7 +315,8 @@ class zip extends Command
         return $result;
     }
 
-    private function check() {
+    private function check()
+    {
         $error = false;
 
         // Let's look at the intersection of the required folders and the folders in the project:
@@ -345,7 +348,8 @@ class zip extends Command
         return !$error;
     }
 
-    private function zip() {
+    private function zip()
+    {
         // Create a "zipfiles" folder if it does not already exist
         if (!(file_exists(base_path('zipfiles')) && is_dir(base_path('zipfiles')))) {
             mkdir(base_path('zipfiles'));
@@ -381,7 +385,8 @@ class zip extends Command
     }
 
     // Handle Artisan command
-    public function handle() {
+    public function handle()
+    {
         $this->io = new SymfonyStyle($this->input, $this->output);
         $this->io->title('Web engineering - Automatic zipper for Laravel');
         $this->io->section('1. step: Statement');
