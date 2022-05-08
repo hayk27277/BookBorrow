@@ -1,6 +1,6 @@
 # Laravel book borrow system
 
-## How to use it
+## Instructuions(1,2) and commands to run(3-5)
 
 1. Prepare your PHP environment. For this, you can download and use the [PHP, Composer installer](https://github.com/totadavid95/PhpComposerInstaller).
 2. Install [Node.js](https://nodejs.org/en/) for the client-side assets.
