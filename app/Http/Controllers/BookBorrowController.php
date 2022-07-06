@@ -16,6 +16,6 @@ class BookBorrowController extends Controller
             'status' => BorrowStatus::PENDING
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Book borrowed successfully!');
     }
 }
