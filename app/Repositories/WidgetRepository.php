@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Repositories;
 
 use App\Enums\BorrowStatus;
 use App\Models\Borrow;
@@ -8,7 +8,7 @@ use App\Models\Genre;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 
-class WidgetService
+class WidgetRepository
 {
     public function getWidgetsData(): array
     {

@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
-use App\Services\WidgetService;
+use App\Repositories\WidgetRepository;
 use Illuminate\Contracts\View\View;
 
 class MainController extends Controller
 {
-    /**
-     * @param WidgetService $widgetService
-     * @return View
-     */
-    public function index(WidgetService $widgetService): view
+    public function __construct(
+        private WidgetRepository $widgetRepository
+    ){}
+
+    public function index(): view
     {
         return view('pages.main',
-            $widgetService->getWidgetsData() + [
+            $this->widgetRepository->getWidgetsData() + [
                 'books' => Book::paginate()
             ]);
     }

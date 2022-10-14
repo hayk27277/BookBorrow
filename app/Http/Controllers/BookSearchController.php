@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
-use App\Services\WidgetService;
+use App\Repositories\WidgetRepository;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class SearchController extends Controller
+class BookSearchController extends Controller
 {
-   public function searchBooks(Request $request, WidgetService $widgetService): View
+    public function __construct(
+        private WidgetRepository $widgetRepository
+    ){}
+
+    public function searchBooks(Request $request ): View
    {
        $query = $request->q;
 
@@ -18,7 +22,7 @@ class SearchController extends Controller
            ->paginate();
 
        return view('pages.search',
-           $widgetService->getWidgetsData() + [
+           $this->widgetRepository->getWidgetsData() + [
                'books' =>$books
            ]
        );

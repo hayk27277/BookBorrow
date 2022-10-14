@@ -4,22 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Genre;
-use App\Services\WidgetService;
+use App\Repositories\WidgetRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 
 class GenreController extends Controller
 {
-    /**
-     * @param string $genreName
-     * @param WidgetService $widgetService
-     * @return Application|Factory|View
-     */
+    public function __construct(
+        private WidgetRepository $widgetRepository
+    ){}
+
     public function getBooksByGenreName(
-        string        $genreName,
-        WidgetService $widgetService,
-        Book          $bookModel
+        string           $genreName,
+        Book             $bookModel
     ): View|Factory|Application
     {
         $genre = Genre::where('name', $genreName)->firstOrFail();
@@ -27,7 +25,7 @@ class GenreController extends Controller
         $books = $bookModel->whereGenre($genre)->paginate();
 
         return view('pages.main',
-            $widgetService->getWidgetsData() + compact('books')
+            $this->widgetRepository->getWidgetsData() + compact('books')
         );
     }
 }

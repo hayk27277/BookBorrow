@@ -20,21 +20,9 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
                 <li class="nav-item ">
-                    <a href=""
+                    <a href="/"
                        class="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium active border-primary border-width-2">
-                        Kindles
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href=""
-                       class="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium border-primary border-width-2">
                         Paper Books
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href=""
-                       class="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium border-primary border-width-2">
-                        Electronic
                     </a>
                 </li>
             </ul>

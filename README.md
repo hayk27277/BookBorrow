@@ -7,5 +7,6 @@
 3. composer install
 4. php artisan key:generate
 5. php artisan migrate --seed
-6. npm run watch
-7. php artisan serve
+6. npm install
+7. npm run watch
+8. php artisan serve
